@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>President guess by user</title>
+      </head>
+<body>
+
+<h2>Getting input</h2>
+
+<form>
+    <label for="actual_input">Enter the secret president name</label>
+    <input type ="password" id="actual_input" name="actual_input"  value="George Washington"> <br>
+
+    <label for="guess_val">Guess the president </label>
+    <input type ="text" id="guess_val" name="guess_val" autofocus> <br>
+
+    <input type="button" onclick="checkGuess()" value="Check the guess">
+</form>
+
+<p id="result">Results of guess</p>
+
+   
+
+<script> 
+
+    var correct = 0;
+    var wrong = 0;
+
+function checkGuess (){
+    console.log("Getting form values")
+    
+    actualValue = document.getElementById("actual_input").value
+    givenValue = document.getElementById("guess_val").value
+    
+    
+    out = document.getElementById("result")
+
+    if(actualValue == givenValue){
+        correct= correct+1
+        alert('You got it right')
+        out.innerHTML = "Correct guess "+correct + " Wrong guess "+ wrong + "\n"
+    } else {
+        wrong=wrong+1
+        alert('Wrong President')
+        out.innerHTML = "Correct guess "+correct + " Wrong guess "+ wrong+ "\n"
+    }
+}
+</script>
+
+</body>
+</html> 
