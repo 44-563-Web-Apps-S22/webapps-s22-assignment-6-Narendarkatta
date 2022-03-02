@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Collecting tips
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Computes tips</h2>
+        <form>
+            <div class="col-md-3">
+                <label for="chk_amt">Enter a check amount</label>
+                <input type="number" class="form-control" id="chk_amt" name="chk_amt" min=10 max=50 step=2 value=20>
+                <br>
+            </div>
+            <div class="col-md-3">
+                <label for="tip_inc">Enter tip increase </label>
+                <input type="number" class="form-control" id="tip_inc" name="tip_inc" autofocus value=0.05> <br>
+            </div>
+            <input type="button" class="btn btn-primary mb-3" onclick="tips()" value="Find Tips">
+        </form>
+
+
+        <p id="result">This text will be replaced </p>
+
+
+        <form>
+
+            <input type="radio" id="times" name="arth" value="times" onclick="chooseOp()">
+            <label for="times">*</label></br>
+
+            <input type="radio" id="divide" name="arth" onclick="chooseOp()" value="divide">
+            <label for="divide">/</label></br>
+
+            <input type="radio" id="exponent" name="arth" onclick="chooseOp()" value="exponent">
+            <label for="exponent">**</label></br>
+        </form>
+
+        <p id="result1">Select any operation</p>
+    </div>
+
+    <script>
+        function chooseOp() {
+            var chkamount = (Number)(document.getElementById("chk_amt").value);
+            var incrtip = (Number)(document.getElementById("tip_inc").value);
+
+            exponent = document.getElementById("exponent").checked
+
+            times = document.getElementById("times").checked
+
+            divide = document.getElementById("divide").checked
+
+            if (exponent) {
+                document.getElementById('result1').innerHTML = "Exponential Value of Amount and Tip is: " + chkamount ** incrtip
+            }
+            else if (times) {
+                document.getElementById('result1').innerHTML = "Multiplication Value of Amount and Tip is: " + chkamount * incrtip
+            }
+            else if (divide) {
+                document.getElementById('result1').innerHTML = "Division value of Amount and Tip is: " + chkamount / incrtip
+            }
+        }
+    </script>
+
+    <script>
+
+        function tips() {
+            chkamount = (Number)(document.getElementById("chk_amt").value)
+            incrtip = (Number)(document.getElementById("tip_inc").value)
+            result = "Tip amounts by increase of " + incrtip + " are:"
+
+
+            var sum = chkamount * 0.1;
+            result += sum + 0.0;
+
+            for (let i = 0; i < 9; i++) {
+                var y = sum + (chkamount * incrtip);
+                result += "  " + Math.round(y * 10) / 10;
+                sum = Math.round(y * 10) / 10;
+            }
+            document.getElementById('result').innerHTML = result;
+        }
+    </script>
+
+</body>
+
+</html>

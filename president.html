@@ -1,51 +1,100 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>President guess by user</title>
-      </head>
+
+<head>
+    <title>President guess by user</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
+</head>
+
 <body>
+    <div class="container">
+        <h2>Getting input</h2>
 
-<h2>Getting input</h2>
+        <form>
+            <div class="col-md-3">
+                <label for="actual_input">Enter the secret president name</label>
+                <input type="password" class="form-control" id="actual_input" name="actual_input"
+                    value="George Washington"> <br>
+            </div>
+            <div class="col-md-3">
+                <label for="guess_val">Guess the president </label>
+                <input type="text" class="form-control" id="guess_val" name="guess_val" autofocus> <br><br>
+            </div>
+            <input type="button" class="btn btn-primary mb-3" id="btn_lck" onclick="checkGuess()"
+                value="Check the guess">
+        </form>
 
-<form>
-    <label for="actual_input">Enter the secret president name</label>
-    <input type ="password" id="actual_input" name="actual_input"  value="George Washington"> <br>
+        <p id="result">Results of guess</p>
 
-    <label for="guess_val">Guess the president </label>
-    <input type ="text" id="guess_val" name="guess_val" autofocus> <br>
+        <div>
+            <h4>Click on image to see magic</h4>
+            <img src="Toucan.jpg" id="toucan" width="100" height="100" onclick="swapImage()">
+            <script>
+                var useImage = 1;
+                function swapImage() {
+                    switch (useImage) {
+                        case 1:
+                            document.getElementById('toucan').src = "Turkey.jpg";
+                            useImage = 2;
+                            break;
+                        case 2:
+                            document.getElementById('toucan').src = "Albatross.jpg";
+                            useImage = 3;
+                        case 3:
+                            break;
+                            document.getElementById('toucan').src = "Toucan.jpg";
+                            useImage = 1;
+                            break;
+                    }
+                }
+            </script>
 
-    <input type="button" onclick="checkGuess()" value="Check the guess">
-</form>
+        </div>
+    </div>
+    <script>
 
-<p id="result">Results of guess</p>
+        var correct = 0;
+        var wrong = 0;
+        var tem = 0;
 
-   
+        function checkGuess() {
+            console.log("Getting form values")
 
-<script> 
+            actualValue = document.getElementById("actual_input").value
+            givenValue = document.getElementById("guess_val").value
 
-    var correct = 0;
-    var wrong = 0;
 
-function checkGuess (){
-    console.log("Getting form values")
-    
-    actualValue = document.getElementById("actual_input").value
-    givenValue = document.getElementById("guess_val").value
-    
-    
-    out = document.getElementById("result")
+            out = document.getElementById("result")
 
-    if(actualValue == givenValue){
-        correct= correct+1
-        alert('You got it right')
-        out.innerHTML = "Correct guess "+correct + " Wrong guess "+ wrong + "\n"
-    } else {
-        wrong=wrong+1
-        alert('Wrong President')
-        out.innerHTML = "Correct guess "+correct + " Wrong guess "+ wrong+ "\n"
-    }
-}
-</script>
+            if (actualValue == givenValue) {
+                correct = correct + 1
+                alert('You got it right')
+                out.innerHTML = "Correct guess " + correct + " Wrong guess " + wrong + "\n"
+                tem = 0;
+            } else {
+                wrong = wrong + 1
+                alert('Wrong President')
+                out.innerHTML = "Correct guess " + correct + " Wrong guess " + wrong + "\n"
+                tem = tem + 1;
+            }
+            if (tem == 3) {
+                document.getElementById("btn_lck").onclick = lock
+            }
+            function lock() {
+                alert("Sorry, game over.")
+            }
+        }
+    </script>
 
 </body>
-</html> 
+
+</html>
